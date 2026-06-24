@@ -1,8 +1,54 @@
 ﻿@model Product
 @{
     ViewData["Title"] = "Details Of - " + Model.ProductName;
+    var finalPrice = Model.UnitPrice - (Model.UnitPrice * Model.Discount / 100);
 }
 
-<h1>@Model.ProductName</h1>
-<h3>@Model.Description</h3>
-<h3>@Convert.ToDecimal(@Model.UnitPrice - @Convert.ToDecimal(((@Model.UnitPrice * @Model.Discount) / 100)))</h3>
+<nav aria-label="breadcrumb" class="my-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Products" asp-action="Index">Products</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.ProductName</li>
+    </ol>
+</nav>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="row g-0">
+        <div class="col-md-5">
+            <div class="product-detail-img-wrap h-100">
+                @if (Model.Discount > 0)
+                {
+                    <span class="badge bg-danger discount-badge">-@Model.Discount%</span>
+                }
+                <img src="@Url.Content(Model.Picture)" class="product-detail-img" alt="@Model.ProductName">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card-body p-4 p-lg-5">
+                <h1 class="fw-bold mb-2">@Model.ProductName</h1>
+                <p class="text-muted">@Model.Description</p>
+
+                <div class="my-3">
+                    <span class="fw-bold display-6 text-success">&#8377;@finalPrice.ToString("N0")</span>
+                    @if (Model.Discount > 0)
+                    {
+                        <span class="text-muted text-decoration-line-through ms-2 fs-5">&#8377;@Model.UnitPrice.ToString("N0")</span>
+                        <span class="badge bg-danger ms-2 align-middle">Save @Model.Discount%</span>
+                    }
+                </div>
+
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item d-flex justify-content-between"><span class="text-muted">Gender</span><span class="fw-semibold">@Model.Gender</span></li>
+                    <li class="list-group-item d-flex justify-content-between"><span class="text-muted">Made In</span><span class="fw-semibold">@Model.MadeIn</span></li>
+                    <li class="list-group-item d-flex justify-content-between"><span class="text-muted">Warranty</span><span class="fw-semibold">@Model.WarrantyPeriod</span></li>
+                    <li class="list-group-item d-flex justify-content-between"><span class="text-muted">Return Policy</span><span class="fw-semibold">@Model.ReturnPolicy</span></li>
+                </ul>
+
+                <div class="d-flex gap-2">
+                    <a class="btn btn-success btn-lg flex-grow-1">Add To Cart</a>
+                    <a class="btn btn-outline-secondary btn-lg" asp-action="Index">Back to Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
