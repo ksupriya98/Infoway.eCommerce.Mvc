@@ -19,6 +19,8 @@ public class eCommerceDbContext : DbContext
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
     public DbSet<Invoice> Invoices { get; set; }
+    public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<Shipper> Shippers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
