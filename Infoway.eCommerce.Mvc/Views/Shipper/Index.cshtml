@@ -1,0 +1,40 @@
+@model IEnumerable<Shipper>
+@{
+    ViewData["Title"] = "Shippers";
+}
+
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h1 class="fw-bold mb-0">Shippers</h1>
+    <a class="btn btn-primary" asp-action="Create">+ Add Shipper</a>
+</div>
+
+@if (Model.Any())
+{
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Shipper shipper in Model)
+                {
+                    <tr>
+                        <td>@shipper.ShipperId</td>
+                        <td class="fw-semibold">@shipper.Name</td>
+                        <td>@shipper.ContactNumber</td>
+                        <td>@shipper.EmailId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">No shippers yet. Click <strong>Add Shipper</strong> to create one.</div>
+}

@@ -1,0 +1,38 @@
+@model IEnumerable<Supplier>
+@{
+    ViewData["Title"] = "Suppliers";
+}
+
+<div class="d-flex justify-content-between align-items-center my-4">
+    <h1 class="fw-bold mb-0">Suppliers</h1>
+    <a class="btn btn-primary" asp-action="Create">+ Add Supplier</a>
+</div>
+
+@if (Model.Any())
+{
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Supplier supplier in Model)
+                {
+                    <tr>
+                        <td>@supplier.SupplierId</td>
+                        <td class="fw-semibold">@supplier.Name</td>
+                        <td>@supplier.City</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">No suppliers yet. Click <strong>Add Supplier</strong> to create one.</div>
+}
