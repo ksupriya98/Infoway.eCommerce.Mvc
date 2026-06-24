@@ -1,0 +1,32 @@
+﻿using Infoway.eCommerce.Mvc.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace Infoway.eCommerce.Mvc.Dal;
+
+public class eCommerceDbContext : DbContext
+{
+    public eCommerceDbContext()
+    {
+        
+    }
+    public eCommerceDbContext(DbContextOptions<eCommerceDbContext> options):base(options) 
+    { 
+
+    }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Cart> Carts { get; set; }
+    public DbSet<CartItem> CartItems { get; set; }
+    public DbSet<Invoice> Invoices { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseMySQL("Server=192.168.100.99;Port=3306;Database=ECommerceDb;User Id=saleel;Password=saleel;");
+           //optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=MSSqlEComDb;Trusted_Connection=True;TrustServerCertificate=True;");
+        }
+    }
+
+}
