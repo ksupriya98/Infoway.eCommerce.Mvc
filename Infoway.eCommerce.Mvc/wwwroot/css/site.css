@@ -21,6 +21,13 @@ body {
   margin-bottom: 60px;
 }
 
+/* ---- Active nav link ---- */
+.navbar-nav .nav-link.active {
+  color: #0d6efd !important;
+  font-weight: 600;
+  border-bottom: 2px solid #0d6efd;
+}
+
 /* ---- Home hero carousel ---- */
 .hero-slide {
   height: 460px;
