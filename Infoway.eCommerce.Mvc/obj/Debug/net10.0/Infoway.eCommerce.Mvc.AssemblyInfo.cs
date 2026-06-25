@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Infoway.eCommerce.Mvc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f61992bb87ff6e4c33a430a921a5603e6b39e1e9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76f07781cedfe7d0921505c9ca317b29f20e4ca5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Infoway.eCommerce.Mvc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Infoway.eCommerce.Mvc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

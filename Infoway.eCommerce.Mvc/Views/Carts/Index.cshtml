@@ -1,0 +1,69 @@
+@model List<CartItem>
+@{
+    ViewData["Title"] = "Your Cart";
+    decimal Discounted(Product p) => p.UnitPrice - (p.UnitPrice * p.Discount / 100);
+    var grandTotal = Model.Sum(i => Discounted(i.Product) * i.Quantity);
+}
+
+<h1 class="fw-bold my-4">Your Cart</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info d-flex justify-content-between align-items-center">
+        <span>Your cart is empty.</span>
+        <a class="btn btn-primary" asp-controller="Products" asp-action="Index">Continue Shopping</a>
+    </div>
+}
+else
+{
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Product</th>
+                    <th class="text-end">Price</th>
+                    <th class="text-center">Qty</th>
+                    <th class="text-end">Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var price = Discounted(item.Product);
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <img src="@Url.Content(item.Product.Picture)" alt="@item.Product.ProductName"
+                                     style="width:64px;height:64px;object-fit:cover;border-radius:.5rem;background:#f6f7f9;">
+                                <span class="fw-semibold">@item.Product.ProductName</span>
+                            </div>
+                        </td>
+                        <td class="text-end">&#8377;@price.ToString("N0")</td>
+                        <td class="text-center">@item.Quantity</td>
+                        <td class="text-end fw-semibold">&#8377;@((price * item.Quantity).ToString("N0"))</td>
+                        <td class="text-end">
+                            <form asp-action="RemoveItem" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="cartItemId" value="@item.CartItemId" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot class="table-light">
+                <tr>
+                    <th colspan="3" class="text-end">Grand Total</th>
+                    <th class="text-end text-success">&#8377;@grandTotal.ToString("N0")</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+        <a class="btn btn-outline-secondary" asp-controller="Products" asp-action="Index">Continue Shopping</a>
+        <button class="btn btn-success" disabled>Checkout</button>
+    </div>
+}

@@ -2624,7 +2624,7 @@
     ]
   },
   "packageFolders": {
-    "/var/folders/tm/h6q3z_pj4ls71xm5xbnjn8p40000gn/T/cursor-sandbox-cache/ad03a3f2e2599e5e1218304f4f18b998/nuget": {}
+    "/var/folders/tm/h6q3z_pj4ls71xm5xbnjn8p40000gn/T/cursor-sandbox-cache/fcd7a61801314471a6f3785fd30288d5/nuget": {}
   },
   "project": {
     "version": "1.0.0",
@@ -2632,7 +2632,7 @@
       "projectUniqueName": "/Users/sumeet/Public/stuff/code/didi/Infoway.eCommerce.Mvc/Infoway.eCommerce.Mvc/Infoway.eCommerce.Mvc.csproj",
       "projectName": "Infoway.eCommerce.Mvc",
       "projectPath": "/Users/sumeet/Public/stuff/code/didi/Infoway.eCommerce.Mvc/Infoway.eCommerce.Mvc/Infoway.eCommerce.Mvc.csproj",
-      "packagesPath": "/var/folders/tm/h6q3z_pj4ls71xm5xbnjn8p40000gn/T/cursor-sandbox-cache/ad03a3f2e2599e5e1218304f4f18b998/nuget",
+      "packagesPath": "/var/folders/tm/h6q3z_pj4ls71xm5xbnjn8p40000gn/T/cursor-sandbox-cache/fcd7a61801314471a6f3785fd30288d5/nuget",
       "outputPath": "/Users/sumeet/Public/stuff/code/didi/Infoway.eCommerce.Mvc/Infoway.eCommerce.Mvc/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [

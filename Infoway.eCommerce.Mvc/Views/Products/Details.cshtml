@@ -45,7 +45,11 @@
                 </ul>
 
                 <div class="d-flex gap-2">
-                    <a class="btn btn-success btn-lg flex-grow-1">Add To Cart</a>
+                    <form asp-controller="Carts" asp-action="AddToCart" method="post" class="flex-grow-1 m-0">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="productId" value="@Model.ProductId" />
+                        <button type="submit" class="btn btn-success btn-lg w-100">Add To Cart</button>
+                    </form>
                     <a class="btn btn-outline-secondary btn-lg" asp-action="Index">Back to Products</a>
                 </div>
             </div>
