@@ -86,6 +86,53 @@ public class CartsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Checkout()
+    {
+        var cartId = HttpContext.Session.GetInt32(CartSessionKey);
+        if (cartId == null)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+        var hasItems = await _context.CartItems.AnyAsync(ci => ci.CartId == cartId);
+        if (!hasItems)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+        var invoice = await _context.Invoices.FirstOrDefaultAsync(i => i.CartId == cartId);
+        if (invoice == null)
+        {
+            invoice = new Invoice { CartId = cartId.Value, InvoiceDate = DateTime.Now };
+            _context.Invoices.Add(invoice);
+            await _context.SaveChangesAsync();
+        }
+
+        HttpContext.Session.Remove(CartSessionKey);
+        HttpContext.Session.SetInt32("CartCount", 0);
+
+        return RedirectToAction(nameof(OrderConfirmation), new { id = invoice.InvoiceId });
+    }
+
+    public async Task<IActionResult> OrderConfirmation(int id)
+    {
+        var invoice = await _context.Invoices.FirstOrDefaultAsync(i => i.InvoiceId == id);
+        if (invoice == null)
+        {
+            return NotFound();
+        }
+
+        var items = await _context.CartItems
+            .Include(ci => ci.Product)
+            .Where(ci => ci.CartId == invoice.CartId)
+            .ToListAsync();
+
+        ViewBag.Invoice = invoice;
+        return View(items);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> RemoveItem(int cartItemId)
     {
         var item = await _context.CartItems.FindAsync(cartItemId);
